@@ -1,0 +1,157 @@
+SQl SCRIPT
+==========
+CREATE DATABASE SQL_demo
+
+CREATE TABLE customer
+(
+			"ID" int8 PRIMARY KEY,
+			"Name" varchar(50) NOT NULL,
+			"Age" int NOT NULL,
+			"City" char(50),
+			"Salary" numeric
+);
+
+INSERT INTO customer
+("ID","Name","Age","City","Salary")
+VALUES
+(1,'Tanveer',22,'Karoshi',500000),
+(2,'Anik',26,'Karoshi',500000),
+(3,'ASIF',24,'Karoshi',500000);
+
+UPDATE Customer
+SET "Age" = 25, "Salary" = 100000
+WHERE "ID" = 3;
+
+DELETE FROM CUSTOMER
+WHERE "ID" = 4;
+
+
+
+create table employee
+(
+	emp_id integer PRIMARY KEy,
+	emp_name varchar(50) not NULL
+);
+
+
+select * FROM CUSTOMER;
+
+select * FROM employee;
+
+DROP TABLE employee;
+
+TRUNCATE TABLE Customer;
+
+
+CREATE TABLE Student
+(
+			std_id int PRIMARY KEY,
+			std_name varchar(50) NOT NULL,
+			std_grade char(12)
+);
+
+INSERT INTO Student
+VALUES
+(1,'Tanveer','A'),
+(2,'Anik','A'),
+(3,'Asif','B'),
+(4,'Asiya','C'),
+(5,'Rida','B'),
+(6,'Shanu','A');
+
+SELECT * FROM Student;
+
+SELECT std_name FROM Student;
+
+SELECT DISTINCT std_grade FROM Student;
+
+SELECT * FROM Student
+where std_grade = 'A' AND std_id >= 3;
+
+SELECT * FROM Student 
+LIMIT 3;
+
+SELECT * FROM Student 
+ORDER BY std_name DESC;
+
+
+SELECT UPPER(std_name) FROM Student;
+
+SELECT LOWER(std_name) FROM Student;
+
+SELECT LENGTH(std_name), std_name FROM Student;
+
+SELECT SUBSTRING(std_name, 1, 3), std_name FROM Student;
+
+SELECT CONCAT(std_name,std_grade),std_name, std_grade FROM Student;
+
+SELECT REPLACE(std_name,'Tanveer','TanveerPatel') FROM Student;
+
+
+CREATE TABLE PAYMENT(
+cus_id int PRIMARY KEY,
+payment bigint,
+name varchar(50)
+);
+
+SELECT * FROM PAYMENT;
+
+INSERT INTO PAYMENT
+VALUES
+(1,100,'Tanveer'),
+(2,70,'Asif'),
+(3,80,'Anik'),
+(4,10,'Asiya'),
+(5,90,'Rida'),
+(6,100,'Patel');
+
+SELECT COUNT(*) FROM PAYMENT;
+
+SELECT COUNT(payment) FROM PAYMENT;
+
+SELECT SUM(payment) FROM PAYMENT;
+
+SELECT MAX(payment) FROM PAYMENT;
+
+SELECT MIN(payment) FROM PAYMENT;
+
+SELECT AVG(payment) FROM PAYMENT;
+
+SELECT ROUND(AVG(payment),2) FROM PAYMENT;
+
+CREATE TABLE payments(
+cus_id int PRIMARY KEY,
+amount bigint,
+mode varchar(50),
+name varchar(50)
+);
+
+INSERT INTO payments
+VALUES
+(1,100,'Cash','Tanveer'),
+(2,70,'Cridit','Asif'),
+(3,80,'Debit','Anik'),
+(4,10,'Cash','Asiya'),
+(5,90,'Cash','Rida'),
+(6,100,'Debit','Patel');
+
+SELECT * FROM payments;
+
+SELECT mode, COUNT(amount) as TOTAL 
+FROM payments
+GROUP BY mode
+HAVING COUNT(amount) >= 2 
+ORDER BY TOTAL
+
+SELECT mode, COUNT(amount) as TOTAL 
+FROM payments
+GROUP BY mode
+HAVING COUNT(amount) >= 2 AND COUNT(amount) < 3
+ORDER BY TOTAL
+
+
+
+
+
+
+
