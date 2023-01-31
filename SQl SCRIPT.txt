@@ -148,6 +148,106 @@ FROM payments
 GROUP BY mode
 HAVING COUNT(amount) >= 2 AND COUNT(amount) < 3
 ORDER BY TOTAL
+================
+
+
+
+CREATE TABLE employee(
+e_id int not null,
+e_name varchar(50),
+e_salary int,
+e_age int,
+e_gender char(10),
+e_dept varchar(20),
+primary key(e_id)
+);
+
+select * from employee;
+
+
+insert into employee
+values
+(2,'Tanveer',25000,22,'M','dev'),
+(3,'Anik',50000,22,'M','QA'),
+(4,'Asif',250000,22,'M','CEO'),
+(5,'Asiya',29000,22,'F','TECH');
+
+
+select e_name from employee;
+
+select e_name,e_gender from employee;
+
+select * from employee;
+
+select distinct e_name from employee;
+
+select distinct e_gender from employee;
+
+select * from employee
+where e_gender = 'F';
+
+select * from employee
+where e_salary > 25000;
+
+select * from employee
+where e_salary > 25000 AND e_gender= 'F';
+
+select * from employee
+where e_salary > 25000 OR e_gender= 'F';
+
+select * from employee
+where NOT e_gender= 'F';
+
+select * from employee
+where e_name LIKE 'A%'
+
+
+select * from employee
+where e_salary BETWEEN 25000 AND 100000;
+ 
+select COUNT(e_age) from employee;
+
+select MIN(e_salary) as minimum from employee;
+
+select MAX(e_salary) as maximum from employee;
+
+select SUM(e_salary) as total from employee;
+
+select AVG(e_salary) as average from employee;
+
+select ROUND(AVG(e_salary),2) as average from employee;
+
+
+select * from employee
+order by e_name desc;
+
+
+select * from employee
+order by e_salary DESC
+limit 1;
+
+select ROUND(avg(e_salary),3),e_gender
+from employee
+Group by e_gender
+order by avg(e_salary) desc;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

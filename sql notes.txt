@@ -11,20 +11,31 @@ R:--> Read
 U:--> Update
 D:--> Delete
 
-SQL Commands
-============
+SQL Commands | Application of sql
+==================================
 1:DDl:-->data defination language
+---------------------------------
+--> DDL means you can independently creat database, define its structure use it and then discard it when yor are done with it.
+
 --> create
 --> alter
 --> drop
 
 2:DML:--> data manipulation language
+------------------------------------
+--> DML means you can used already existing database for maintaining a database.
+
 --> select
 --> insert
 --> update
 --> delete
 
 3:DCL:--> data control language
+-------------------------------
+--> DCl specifies how you can protect your database against corruption and misuse.
+--> DCL is used to avoid the data missused 
+-->DCL is used to avoid the data corruption .
+
 --> grant
 --> revoke
 
@@ -51,6 +62,7 @@ Primary and Foreign Keys
 ========================
 1:Primary key(PK):
 
+--> using primary key we can uniquely identify each record in a table.
 --> A table can have only one primary key
 --> primary key should be unique
 --> primary key should not be "NOT NULL" values
@@ -469,7 +481,7 @@ HAVING Clause
 --> HAVING Clause is used when we apply the condition with GROUP BY
 
 --> HAVING Clause is used to apply filter on the result of GROUP BY based on the specific conditions.
---> WHERE clause places conditions on the slected columns,
+--> WHERE clause places conditions on the selected columns,
 --> whereas The HAVING clause places condition on groups created by the GROUP BY clause.
 --> having is always used below the GROUP BY.
 

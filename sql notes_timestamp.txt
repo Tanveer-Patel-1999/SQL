@@ -1,0 +1,83 @@
+TIMESTAMP & EXTRACT
+===================
+--> TIMESTAMP is a data type which contain both "date" and "time" parts.
+
+1:TIME --> TIME conatins only time , HH:MI:SS format
+2:DATE --> DATE conatins only date , YYYY-MM-DD format
+3:YEAR --> YEARconatins only year , YYYY or YY format
+4:TIMESTAMP --> TIMESTAMP contain date and time , YYYY-MM-DD  HH:MI:SS
+4:TIMESTAMPZ --> TIMESTAMPZ contain date and time zone , 
+ 
+
+TIMESTAMP FUNCTION / OPERATORS
+=============================
+1:SHOW TIMEZONE
+2:SELECT NOW()
+3:SELECT TIMEOFDAY()
+4:SELECT CURRENT_TIME
+5:SELECT CURRENT_DATE
+
+
+EXTRACT FUNCTION
+=================
+--> EXTRACT() --> It is used to extract any date and time of its any part.
+--> this function extracts a part from a given date value.
+
+	syntax
+	------
+		SELECT EXTRACT( EXTRACT_FIELD FROM date_feild)
+		FROM TABLE_NAME;
+
+	Example
+	------
+		SELECT EXTRACT( MONTH FROM date_feild)
+		FROM TABLE_NAME;
+
+
+EXTRACT_FIELD
+-------------
+1:YEAR	
+2:QUARTER
+3:MONTH
+4:WEEK
+5:DAY
+6:HOUR
+7:MINUTE
+8:DOW --> DAY OF WEEK
+9:DOY --> DAY OF YEAR 
+
+
+CREATE TABLE BANK(
+cus_id int PRIMARY KEY,
+payment bigint,
+name varchar(50),
+"payment_date" date
+);
+
+SELECT * FROM BANK;
+
+DROP TABLE BANK;
+
+INSERT INTO BANK
+VALUES
+(1,100,'Tanveer','2023-01-02'),
+(2,70,'Asif','2023-01-25'),
+(3,80,'Anik','2023-01-11'),
+(4,10,'Asiya','2023-01-1'),
+(5,90,'Rida','2023-01-19'),
+(6,100,'Patel','2023-01-10');
+
+SELECT EXTRACT(MONTH FROM payment_date) as payment_month,payment_date
+FROM BANK
+
+SELECT EXTRACT(YEAR FROM payment_date) as payment_year,payment_date
+FROM BANK
+
+SELECT EXTRACT(DOW FROM payment_date) as payment_dow,payment_date
+FROM BANK
+
+SELECT EXTRACT(QUARTER FROM payment_date) as payment_quarter,payment_date
+FROM BANK
+
+SELECT EXTRACT(DAY FROM payment_date) as payment_day,payment_date
+FROM BANK

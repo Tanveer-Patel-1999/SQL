@@ -1,0 +1,153 @@
+SQL JOINS
+=========
+--> JOIN means to combine something.
+--> A JOIN clause is used to combine data from two or more table based on related column (same column) between them.
+
+Example
+========
+employee
+department
+manager
+projects
+
+note --> column name does not matter in join 
+     --> values is matter in join values must be same
+
+Types
+====
+1: inner join / JOIN
+--------------------
+--> only the record which are prsent in both table will be fetch.
+
+	syntax
+	-------
+		SELECT cloumn_name, ..
+		FROM TABLE_NAME1 t1 
+		INNER JOIN TABLE_NAME2 t2 
+		ON CONDITION;
+
+
+	
+-- Fetch the epmloyee name and department name the  belongs tovy 
+-- INNER JOIN  / JOIN
+
+
+	example
+	-------
+		select e.emp_name, d.dept_name
+		from EMPLOYEE e 
+		inner join DEPARTMENT d 
+		on e.dept_id = d.dept_id;
+
+
+
+left join / left outer join
+===========================
+--> left join do 2 things 
+--> left join  ===> inner join + any addition record in the left table 
+--> if join condition is fail to matching a record from left table to right table it will retrurn "null".
+
+-- Fetch all the employee name and department name the  belongs tovy 
+-- LEFT JOIN  
+-- left join  ===> inner join + any addition record in the left table
+
+
+	example
+	-------
+		select e.emp_name, d.dept_name
+		from EMPLOYEE e 
+		left join DEPARTMENT d 
+		on e.dept_id = d.dept_id;
+
+right join / left outer join
+============================
+--> right join do 2 things 
+--> right join  ===> inner join + any addition record from the right table 
+--> if join condition is fail to matching a record from left table to right table it will retrurn "null".
+
+-- Fetch all the employee name and department name the  belongs tovy 
+-- RIGHT JOIN  
+-- right join  ===> inner join + any addition record in the right table
+
+
+	example
+	-------
+		select e.emp_name, d.dept_name
+		from EMPLOYEE e 
+		right join DEPARTMENT d 
+		on e.dept_id = d.dept_id;
+
+Full outer join / full join
+===========================
+--  full outer join
+
+-- Full join  = Inner join
+-- 				+ all remaining records left table (return null value for any columns fetch) 
+-- 				+ all remaining records right table table (return null value for any columns fetch) 
+
+-- Full join  = Inner join + Left join + Right join
+
+	example
+	--------
+		select e.emp_name,d.dept_name
+		from employee e 
+		full join department d on d.dept_id = e.dept_id;
+
+
+CROSS JOIN
+==========
+--> CROSS JOIN return cartesion product
+--> cross join does not need a join condition (does not used "on" cluase)
+--> A table can not be join with any of with other table but still u want to get information from that table that time go for the cross join.
+
+
+
+-- CROSS JOIN
+-- return cartesian product
+--> cross join does not need a join condition (does not used "on" cluase)
+--> it join every single record from left table to every single record from right table (8*6 = 48)
+
+	example
+	--------
+		select e.emp_name, d.dept_name
+		from employee e ---> emp table having 8 record
+		cross join department d;  --> department table having 6 record
+		--> result = 8 * 6 = 48
+		
+-- example when we used cross join		
+--> write a query to fetch the employee name and their corresponding department name.
+--> also make sure to display the company name and the company location corresponding to each employee
+
+		select e.emp_name, d.dept_name,c.company_name,c.company_location
+		from employee e
+		inner join department d on d.dept_id = e.dept_id
+		cross join company c;
+
+NATURAL JOIN
+============
+-- Nature join --> never used natural join because you giving the control to sql to join the table based on join condition
+-->In Nature join sql will decide what is a join condition not by the user them self
+-->In Nature join we can not used condition or (on cluase ) sql will define the condition
+--> if columns are present in the both table with same name that time it perform inner join.
+--> In Nature join is lool ilke inner join but in inner join user will define join condition and in In Nature join sql will define join condition
+--> if columns are present in the both table with differnt name name that time it perform cross join.
+
+	example
+	--------
+		select e.emp_name,d.dept_name
+		from employee e
+		natural join department d;
+
+
+INNER JOIN --> Fetching only matching record only from both tables.
+
+LEFT JOIN --> Fetching all record from left table and matching record from right table.
+		(inner join + additional record from left table)
+
+RIGHT JOIN --> Fetching all record from right table and matching record from left table.
+		(inner join + additional record from right table)
+
+FULL JOIN  --->  Inner join + Left join + Right join
+
+CROSS JOIN --> it join every single record from left table to every single record from right table (8*6 = 48)
+

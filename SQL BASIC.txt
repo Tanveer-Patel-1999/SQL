@@ -1,0 +1,569 @@
+SQL BASIC
+=========
+
+SQL Tables
+===========
+--> A table is the database object.
+--> A table is comprised of rows and columns in sql
+
+
+Fielsds
+=======
+--> Feilds are basically columns in a table.
+
+Records
+=======
+--> Records are basically rows in a table.
+--> Record give the complete information of single entry or entity.
+
+
+DataType
+========
+
+1:Numeric
+---------
+1:bigint
+2:int
+3:smallint		-32768<-->32768
+4:tinyint		0<-->255
+5:decimal 	
+
+2:Character
+-----------
+1:char(s)		255 characters
+2:varchar(s)		255 characters	
+3:text			65535 characters
+
+
+Date-Time
+---------
+1:date			YYYY-MM-DD
+2:time			HH-MM-SS
+3:year			YYYY
+
+
+
+
+CREATE USE and DROP a database
+==============================
+1:CREATE 
+--------
+	SYNTAX
+	------
+		CREATE DATABASE DATABASE_NAME;
+
+	EXAMPLE
+	------
+		CREATE DATABASE TANVEER;
+
+2:USE
+-----
+	SYNTAX
+	------
+		USE DATABASE_NAME;
+
+	EXAMPLE
+	------
+		USE TANVEER;
+
+3:DROP
+------
+	SYNTAX
+	------
+		DROP DATABASE DATABASE_NAME;
+
+	EXAMPLE
+	-------
+		DROP DATABASE TANVEER;
+
+
+
+CREATE A TABLE
+==============
+--> Name the Table -----> Define the columnss -----> Assign data types of columns
+
+--> CREATE TABLE statement is used to create a new table in a database.
+	Syntax
+	------
+		CREATE TABLE table_name(
+			coulmn1 datatype constraints,
+			coulmn2 datatype constraints,
+			coulmn3 datatype constraints,
+			.......
+			);
+
+	Example
+	------
+		CREATE TABLE employee(
+		e_id int not null,
+		e_name varchar(50),
+		e_salary int,
+		e_age int,
+		e_gender char(10),
+		e_dept varchar(20),
+		primary key(e_id)
+		);
+
+Insert data into table
+=======================
+--> INSERT INTO statement is used to insert new record into table
+	Syntax
+	------
+		INSERT INTO table_name
+			(column1,column2,column3,....columnN)
+		VALUES  (value1,value2,value3,.......valueN);
+
+	Example
+	-------
+		insert into employee
+		values
+		(1,'Tanveer',25000,22,'M','dev'),
+		(2,'Tanveer',25000,22,'M','dev'),
+		(3,'Anik',50000,22,'M','QA'),
+		(4,'Asif',250000,22,'M','CEO'),
+		(5,'Asiya',29000,22,'F','TECH');
+
+Select data from a table | Retrivew data from table
+========================   ========================
+--> SELECT statement is used to Retrivew a data from table in a database.
+
+		Syntax
+		------
+			SELECT * FROM <Table_name>
+
+		Syntax
+		------
+			SELECT COLUMN_NAME1,COLUMN_NAME1,COLUMN_NAMEN
+			FROM <Table_name>
+		
+		Example
+		-------
+			SELECT * FROM customer;
+
+
+DISTINCT
+=========
+--> DISTINCT is always used with SELECT statement.
+--> DISTINCT is used select only unique value or (not repeted values) (exm: gnder --> M , F)
+--> DISTINCT is remove the duplicate values
+
+	syntax
+	------
+		SELECT DISTINCT COLUMN_NAME FROM <Table_name>;
+
+	Example
+	------
+		SELECT DISTINCT e_gender FROM employee;
+
+WHERE clause
+============
+--> where clause is used to extract those record which satisfy a condition
+--> WHERE clause is used to filter records
+--> It is used to extract only those records that fullfill a specific condition.
+	Syntax
+	------
+		SELECT * FROM TABLE_NAME
+		WHERE CONDITION; 
+
+	Syntax
+	------
+		SELECT column1,column2,column3,....columnN
+		FROM TABLE_NAME
+		WHERE CONDITION; 
+
+	Example
+	-------
+		SELECT * FROM employee
+		WHERE e_gender = 'F';
+
+		select * from employee
+		where e_salary > 25000;
+
+Operators in SQL
+================
+--> The character and words are reserved in the SQL are called as operators.
+--> Operators are mostly used with where caluse.
+
+
+1:AND
+-----
+--> AND operator display records if all the conditions separated by AND are true.
+--> It display a record if all condition satisfied.
+	
+	Syntax
+	------
+		SELECT column1,column2,column3,....columnN
+		FROM TABLE_NAME
+		WHERE [CONDITION] AND [CONDITION] AND [CONDITIONN]; 
+
+	Example
+	-------
+		select * from employee
+		where e_salary > 25000 AND e_gender = 'F';
+
+2:OR
+----
+--> OR operator display records all the conditions separated by OR are true.
+--> It display a record if any condition satisfied.
+	
+	Syntax
+	------
+		SELECT column1,column2,column3,....columnN
+		FROM TABLE_NAME
+		WHERE [CONDITION] OR [CONDITION] OR [CONDITIONN];
+
+	Example
+	-------
+		select * from employee
+		where e_salary > 25000 OR e_gender = 'F'; 
+
+3:NOT
+-----
+-->  It display a record if any condition is NOT true..
+	Syntax
+	------
+		SELECT column1,column2,column3,....columnN
+		FROM TABLE_NAME
+		WHERE [CONDITION] NOT [CONDITION] OR [CONDITIONN];
+
+	Example
+	-------
+		select * from employee
+		where NOT e_gender= 'F';
+
+4:LIKE --> It is work on pattern
+------
+--> LIKE operator is used to extract records where a particular pattern is present.
+--> LIKE operator have 2 wild card character
+
+	1: Percentage symbol --> " % "
+		represent zero , one or more characters.
+
+	2: Underscore symbol --> " _ "
+		represent a single character.
+
+        Syntax
+	------
+		SELECT column1,column2,column3,....columnN
+		FROM TABLE_NAME
+		WHERE CLOUMN_NAME LIKE '###'.
+
+NOTE --> Pattern should be in single qoutes ''.
+----
+
+	Example
+	-------
+		select * from employee
+		where e_name LIKE 'A%';
+
+
+5:BETWEEN
+---------
+--> BETWEEN operator is used to select values within a given range.
+        Syntax
+	------
+		SELECT column1,column2,column3,....columnN
+		FROM TABLE_NAME
+		WHERE CLOUMN_NAME BETWEEN VAL1 AND VAL2;
+
+	Example
+	------
+		select * from employee
+		where e_salary BETWEEN 25000 AND 100000;
+
+
+AGGREGATE FUNCTION
+==================
+--> Aggregate function perform a calculation on multiple value and return a single value.
+--> Aggregate function mostly used with GROUP By and SELECT statement.
+
+1:COUNT() --> return total numbers of rows
+2:SUM() --> return sum of all values
+3:AVG() --> return average value
+4:MAX() --> return maximum vallue in the column
+5:MIN() --> returm minimum value in the column
+6:ROUND() --> Rounds a number to a specific number of decimal places.
+
+	Syntax
+	======
+		SELECT AGGREGATE_FUNCTION(CLOUMN_NAME) FROM TABLE_NAME;
+
+	Example
+	------
+		select COUNT(e_age) from employee;
+
+		select MIN(e_salary) as minimum from employee;
+
+		select MAX(e_salary) as maximum from employee;
+	
+		select SUM(e_salary) as total from employee;
+
+		select AVG(e_salary) as average from employee;
+
+		select ROUND(AVG(e_salary),2) as average from employee;
+
+STRING FUNCTION
+===============
+--> function that perform any task on string is called String function.
+--> String function are used to perform an operation on input string and return an output string.
+
+1:UPPER() --> Convert the value of feild to uppercase.
+2:LOWER() --> Convert the value of feild to lowercase.
+3:LENGTH()--> return the length of text feild.
+4:SUBSTRING() --> extracts a substring from a string.
+5:Now() --> return current system date and time
+6:FORMAT() --> used to set the formateof a feild.
+7:CONCAT() --> add two or more string togather.
+8:REPLACE() --> Replace a existing string with new subString
+9:TRIM() -->  It is used to remove the space between words or characters
+10:LTRIM()--> Removes blanks on the left side of the character expression.
+11:REVERSE() --> Reverse all the character in the string.
+
+	Syntax
+	=====
+		SELECT STRING_FUNCTION(CLOUMN_NAME) FROM TABLE_NAME;
+
+	Example
+	=======
+
+		SELECT UPPER(e_name) FROM employee;
+
+		SELECT LOWER(e_name) FROM employee;
+
+		SELECT LENGTH(e_name) std_name FROM employee;
+
+		SELECT SUBSTRING(e_name, 1, 3), se_name FROM employee;
+	
+		SELECT CONCAT(e_name,e_salary),e_name, e_salary FROM employee;
+
+		SELECT REPLACE(e_name,'Tanveer','TanveerPatel') FROM employee;
+
+ORDER BY clause
+===============
+--> ORDER BY is used sort the data in ascending or descending order.
+--> The ORDER BY is used to sort the result set in ascending (ASC) or descending (DESC) order.
+	syntax
+	------
+		SELECT * FROM TABLE_NAME
+		ORDER BY CLOUMN_NAME ASC | DESC;
+
+	syntax
+	------
+		SELECT CLOUMN1 ,CLOUMN1, CLOUMNN FROM TABLE_NAME
+		ORDER BY CLOUMN_NAME ASC | DESC;
+ 
+
+	Example --> ascending
+	-------
+		SELECT * FROM employee
+		ORDER BY e_salary;
+
+	Example --> ascending
+	-------
+		SELECT * FROM employee
+		ORDER BY e_name DESC;
+
+TOP Clause (it is not support in pgAdmin)
+==========
+--> TOP is used to fetch the TOP N record in the table.
+
+	syntax
+	------
+		SELECT TOP [NUMBER OF RECORDS]
+		FROM TABLE_NAME
+		
+
+	Example
+	-------
+		select top 2 * from employee
+		order by e_salary;
+
+
+LIMIT clause
+============
+--> limit is used to retriew how many row u want to retreiw.
+	syntax
+	------
+		SELECT * FROM TABLE_NAME
+		LIMIT 3;
+
+	Example
+	-------
+		select * from employee
+		order by e_salary DESC
+		limit 1;
+
+
+GROUP BY
+=========
+--> The GROUP By statement group rows that have the same value into summary rows.
+--> GROUP BY statement mostly used with aggreagte function.
+
+
+SEQUENCE 
+========
+1:SELECT
+2:FROM
+3:WHERE
+4:GROUP BY
+5:ORDER BY
+
+    OR
+
+1:SELECT
+2:FROM
+4:GROUP BY
+
+
+note--> GROUP By is used when cloumn have same value in multiple times.
+
+	syntax	
+	------
+		SELECT CLOUMN_NAME
+		FROM TABLE_NAME
+		GROUP_BY CLOUM_NAME
+
+	Example
+	-------
+		select avg(e_salary),e_gender 
+		from employee
+		Group by e_gender
+		order by avg(e_salary) desc;
+
+		select ROUND(avg(e_salary),3),e_gender
+		from employee
+		Group by e_gender
+		order by avg(e_salary) desc;
+
+HAVING Clause
+=============
+--> HAVING Clause is used when we apply the condition with GROUP BY
+
+--> HAVING Clause is used to apply filter on the result of GROUP BY based on the specific conditions.
+
+--> WHERE clause places conditions on the selected columns,
+--> whereas The HAVING clause places condition on groups created by the GROUP BY clause.
+--> having is always used below the GROUP BY.
+
+	Syntax
+	------
+		SELECT CLOUMN_NAME
+		FROM TABLE_NAME
+		WHERE CONDITION
+		GROUP BY CLOUMN_NAME
+		HAVING CONDITIONS
+		ORDER BY COLUMN_NAME
+
+	Example
+	------
+		select e_dept , avg(e_salary) as avg_salary
+		from employee
+		group by e_dept
+		having avg(e_salary) > 50000;
+		order by avg(e_salary);
+
+Update data into table
+=====================
+--> UPDATE Statement is used to update existing rows (records) in a table.
+
+
+
+	Syntax
+	------
+		UPDATE TABLE_NAME
+		SET COLUMN1 = VALUE1, COLUMN2 = VALUE2
+		WHERE CONDITION;
+
+	Syntax
+	------
+		UPDATE TABLE_NAME
+		SET COLUMN1 = VALUE1, COLUMN2 = VALUE2
+		WHERE ID = VALUE
+
+	
+	example
+	-------
+		
+		update employee
+		set e_age = 27
+		where e_id = 2;
+
+
+Delete Values in Table
+=======================
+--> DELETE Statement is used to delete existing records in a table
+
+	Syntax
+	------
+		DELETE FROM TABLE_NAME 
+		WHERE CONDITION;
+
+	Example
+	-------
+		DELETE FROM employee
+		WHERE "ID" = 4;
+
+DROP and Truncate Table
+======================
+
+DROP
+=====
+--> DROP TABLE statement is used to delete a table from a database permanantely.
+	syntax
+	------
+		DROP TABLE TABLE_NAME;
+
+	Example
+	-------
+		DROP TABLE employee;
+
+TRUCATE
+=======
+--> TRUNCATE TABLE statement is used to delete the data inside a table but not table itself
+	syntax
+	------
+		TRUNCATE TABLE TABLE_NAME;
+
+	Example
+	-------
+		TRUNCATE TABLE employee;
+
+
+
+Alter table
+===========
+-->ALTER TABLE statement is used to add, delete or modify columns in an existing table.
+
+A:--> ADD CLOUMN
+=================
+	Syntax
+	------
+		ALTER TABLE TABLE_NAME
+		ADD CLOUMN CLOUMN_NAME;
+
+
+B:--> DROP CLOUM
+===============
+	Syntax
+	------
+		ALTER TABLE TABLE_NAME
+		DROP CLOUMN CLOUMN_NAME;
+
+
+C:--> MODIFFYF COLUMN / ALTER CLOUMN
+=====================================
+	Syntax
+	------
+		ALTER TABLE TABLE_NAME
+		ALTER CLOUMN CLOUMN_NAME;
+
+
+
+
+
+
+
+
+
+
+

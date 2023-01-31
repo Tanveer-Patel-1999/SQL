@@ -1,0 +1,125 @@
+-- JOINS ---------
+============
+
+select * from EMPLOYEE
+select * from DEPARTMENT
+select * from MANAGER
+select * from PROJECT
+select * from company;
+
+create table company(
+company_id varchar(20),
+company_name varchar(20),
+company_location varchar(50)
+);
+
+create table family
+(
+memeber_id varchar(20),
+family_name varchar(20),
+age integer,
+parent_id varchar
+)
+
+select * from family;
+
+insert into family
+values
+('F1','Patel',27,'F5'),
+('F2','Desai',20,'F5'),
+('F3','Mull',37,'F2'),
+('F4','Pathan',17,'F7'),
+('F5','Jammadar',47,'F7');
+
+Insert into company
+values
+('C1','crossasyst','mumbai');
+
+-- Fetch the epmloyee name and department name the  belongs tovy 
+-- INNER JOIN  / JOIN
+select e.emp_name, d.dept_name
+from EMPLOYEE e 
+inner join DEPARTMENT d 
+on e.dept_id = d.dept_id;
+
+-- Fetch all the employee name and department name the  belongs tovy 
+-- LEFT JOIN  
+
+-- left join  ===> inner join + any addition record in the left table
+select e.emp_name, d.dept_name
+from EMPLOYEE e 
+left join DEPARTMENT d 
+on e.dept_id = d.dept_id;
+
+-- right join  ===> inner join + any addition record in the right table
+select e.emp_name, d.dept_name
+from EMPLOYEE e 
+right join DEPARTMENT d 
+on e.dept_id = d.dept_id;
+
+-- fetch details of all employee, their manager,their department and the project they work on
+select e.emp_name,d.dept_name,m.manager_name,p.project_name
+From EMPLOYEE e
+left join DEPARTMENt d on e.dept_id = d.dept_id
+left join MANAGER m on m.manager_id = e.manager_id
+left join Project p on p.team_member_id = e.emp_id
+
+
+--  full outer join / full join
+
+-- Full join  = Inner join
+-- 				+ all remaining records left table (return null value for any columns fetch) 
+-- 				+ all remaining records right table table (return null value for any columns fetch) 
+
+-- Full join  = Inner join + Left join + Right join
+
+
+select e.emp_name,d.dept_name
+from employee e 
+full join department d on d.dept_id = e.dept_id;
+
+-- CROSS JOIN
+-- return cartesian product
+--> cross join does not need a join condition (does not used "on" cluase)
+--> it join every single record from left table to every single record from right table (8*6 = 48)
+select e.emp_name, d.dept_name
+from employee e ---> emp table having 8 record
+cross join department d;  --> department table having 6 record
+		--> result = 8 * 6 = 48
+		
+-- example when we used cross join		
+--> write a query to fetch the employee name and their corresponding department name.
+--> also make sure to display the company name and the company location corresponding to each employee
+
+select e.emp_name, d.dept_name,c.company_name,c.company_location
+from employee e
+inner join department d on d.dept_id = e.dept_id
+cross join company c;
+
+
+-- Nature join --> never used natural join because you giving the control to sql to join the table based on join condition
+-->In Nature join sql will decide what is a join condition not by the user them self
+-->In Nature join we can not used condition or (on cluase ) sql will define the condition
+--> if columns are present in the both table with same name that time it perform inner join.
+--> In Nature join is lool ilke inner join but in inner join user will define join condition and in In Nature join sql will define join condition
+--> if columns are present in the both table with differnt name name that time it perform cross join.
+
+select e.emp_name,d.dept_name
+from employee e
+natural join department d;
+
+
+-- Self join --> it is used only one table 
+-- one table can be used in twice
+-- there is a no supprate keyword for slef join we used (inner , left , right join)
+-- join a table to itself is called as self join
+-- write a query to fetch the child name and their age corresponding to their parent name and parent
+
+select child.name as child_name,
+child.age as child_age,
+parent.name as parent_name,
+parent.age as parent_age
+from family as child
+join family as parent on  child.parent_id = parent.memeber_id
+
+select * from family

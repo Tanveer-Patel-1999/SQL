@@ -1,0 +1,59 @@
+set operator
+============
+1:UNION
+2:UNION ALL
+
+1:join the multiple table
+2:we can retrivew data from multiple table.
+
+way to retrivew data from multiple table.
+========================================
+1:JOIN
+2:UNION AND UNION ALL
+3:SUBQUERY
+
+UNION 
+------
+1:it will extract data from both table and eliminate duplicate data.
+
+Table 1		Table 2		Union
+=======		=======		=====
+id			id			id
+
+1			2			1
+2			3			2
+3			4			3
+						4
+
+
+UNION ALL
+---------
+1:it will extract data from both table and also extract duplicate data.
+
+Table 1		Table 2		Union ALL
+=======		=======		=========
+id			id			id
+
+1			2			1
+2			3			2
+3			4			2
+						3
+						3
+						4
+
+
+
+INTERSECTION
+---------
+1:it will extract common data from both tables.
+
+Table 1		Table 2		INTERSECTION
+=======		=======		=========
+id			id			id
+
+1			2		
+2			3	 		2
+3			4			
+						3
+						
+						
